@@ -1,0 +1,50 @@
+{
+  "def_template_comparison": {
+    "changed_pins": [],
+    "design_matches": true,
+    "diearea_matches": true,
+    "extra_in_final": [],
+    "missing_from_final": [],
+    "pin_count_matches": true
+  },
+  "final_def": {
+    "declared_pin_count": 125,
+    "design": "A54_A",
+    "diearea_um": [
+      0.0,
+      0.0,
+      1110.0,
+      1110.0
+    ],
+    "parsed_pin_count": 125,
+    "path": "synthesis/runs/A54_A_wrapper_strong_power3/final/def/A54_A.def",
+    "units": 2000
+  },
+  "gds": {
+    "dbu_um": 0.001,
+    "layer_0_0_bbox_um": [
+      0.0,
+      0.0,
+      1110.0,
+      1110.0
+    ],
+    "layer_0_0_exact_1110_square": true,
+    "layer_0_0_shape_count": 1,
+    "path": "synthesis/runs/A54_A_wrapper_strong_power3/final/gds/A54_A.no_context.gds",
+    "top_cell": "A54_A"
+  },
+  "pass": true,
+  "template_def": {
+    "declared_pin_count": 125,
+    "design": "A54_A",
+    "diearea_um": [
+      0.0,
+      0.0,
+      1110.0,
+      1110.0
+    ],
+    "parsed_pin_count": 125,
+    "path": "organizer_def/A54/project_defs/A/A54_A.def",
+    "units": 200
+  }
+}

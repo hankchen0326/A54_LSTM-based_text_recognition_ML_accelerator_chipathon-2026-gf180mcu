@@ -1,0 +1,16 @@
+DBU round-trip verification
+===========================
+
+Input GDS DBU:       0.001 um
+Integration DBU:     0.005 um
+Round-trip GDS DBU:  0.001 um
+Top cell:            A54_A
+Physical bounding box: (0, 0) to (1110, 1110) um
+Total geometry XOR differences after round trip: 0
+
+Conversion path tested:
+  A54_A.gds (0.001 um) -> A54_A.integration_5nm.gds (0.005 um)
+  -> A54_A.roundtrip_1nm.gds (0.001 um)
+
+The round-trip XOR was run with LibreLane's KLayout xor.drc script across all
+layers present in the design. No geometry was lost or changed.

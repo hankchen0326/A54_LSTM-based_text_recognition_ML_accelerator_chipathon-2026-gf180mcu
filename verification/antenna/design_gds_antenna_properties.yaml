@@ -1,0 +1,13 @@
+- cell: A54_A
+  inout: []
+  input:
+  - rsp_data_IN[0]
+  - rsp_data_IN[1]
+  - rsp_data_IN[2]
+  - rsp_data_IN[3]
+  - rsp_data_IN[4]
+  - rsp_data_IN[5]
+  - rsp_data_IN[6]
+  - rsp_data_IN[7]
+  - rsp_valid_IN
+  output: []

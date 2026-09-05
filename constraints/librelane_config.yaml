@@ -1,0 +1,71 @@
+meta:
+  version: 3
+  flow: Classic
+
+DESIGN_NAME: A54_A
+VERILOG_FILES:
+  - dir::../rtl/core/mul8.v
+  - dir::../rtl/core/act_lut.v
+  - dir::../rtl/core/tanh8.v
+  - dir::../rtl/core/gate_regs.v
+  - dir::../rtl/core/lstm_lane.v
+  - dir::../rtl/core/lstm16x_top.v
+  - dir::../rtl/A54_A.v
+
+CLOCK_PORT: clk
+CLOCK_NET: clk
+CLOCK_PERIOD: 100
+
+PNR_SDC_FILE: dir::constraints.sdc
+SIGNOFF_SDC_FILE: dir::constraints.sdc
+FALLBACK_SDC: dir::constraints.sdc
+
+FP_SIZING: absolute
+DIE_AREA: [0.0, 0.0, 1110.0, 1110.0]
+CORE_AREA: [20.0, 20.0, 1090.0, 1090.0]
+FP_DEF_TEMPLATE: dir::../organizer_def/A54/project_defs/A/A54_A.def
+# LibreLane excludes SPECIAL POWER/GROUND BTERMs from its ordinary strict
+# name comparison. The 123 non-power pins are audited separately against the
+# organizer template; permissive mode allows VDD/VSS to be copied below.
+FP_TEMPLATE_MATCH_MODE: permissive
+FP_TEMPLATE_COPY_POWER_PINS: true
+
+VDD_NETS:
+  - VDD
+GND_NETS:
+  - VSS
+
+SYNTH_STRATEGY: "AREA 0"
+EXTRA_EXCLUDED_CELLS:
+  - gf180mcu_fd_sc_mcu7t5v0__nor2_1
+  - gf180mcu_fd_sc_mcu7t5v0__nor3_1
+PL_TARGET_DENSITY_PCT: 68
+MAX_FANOUT_CONSTRAINT: 10
+GRT_ALLOW_CONGESTION: true
+RUN_POST_GRT_DESIGN_REPAIR: true
+
+DESIGN_REPAIR_MAX_WIRE_LENGTH: 120
+DESIGN_REPAIR_MAX_SLEW_PCT: 50
+DESIGN_REPAIR_MAX_CAP_PCT: 50
+GRT_DESIGN_REPAIR_MAX_WIRE_LENGTH: 0
+GRT_DESIGN_REPAIR_MAX_SLEW_PCT: 50
+GRT_DESIGN_REPAIR_MAX_CAP_PCT: 50
+
+RT_MAX_LAYER: Metal4
+DIODE_ON_PORTS: in
+PDN_MULTILAYER: false
+PDN_VWIDTH: 5
+PDN_HWIDTH: 5
+PDN_VSPACING: 1
+PDN_HSPACING: 1
+PDN_VPITCH: 75
+PDN_HPITCH: 75
+PDN_EXTEND_TO: boundary
+
+CTS_CLK_MAX_WIRE_LENGTH: 0
+CTS_DISTANCE_BETWEEN_BUFFERS: 0
+CTS_SINK_CLUSTERING_SIZE: 20
+CTS_SINK_CLUSTERING_MAX_DIAMETER: 60
+
+PRIMARY_GDSII_STREAMOUT_TOOL: klayout
+ERROR_ON_MAGIC_DRC: true

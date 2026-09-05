@@ -1,153 +1,73 @@
-# chipathon-2026-gf180mcu-padring
+# A54 A-block wrapper
 
-Chipathon 2026 workshop fork of the wafer-space `gf180mcu-project-template`.
-Adds a new LibreLane slot, `workshop`, that mirrors Juan Moya's
-standalone workshop padring as a native LibreLane slot definition so
-participants can take the flow all the way to GDS with the stock
-template Makefile.
+This directory contains a separate physical-design wrapper for the existing
+`lstm16x_top` RTL.  The LSTM implementation is unchanged.  The new top-level
+module, `A54_A`, exposes exactly the internal pad-cell terminals specified by
+the organizer's latest `A54_A.def` template.
 
-No PRs are planned against upstream; all chipathon-specific material
-stays in this fork.
+Physical requirements:
 
-## Credits
+- origin: `(0, 0)`
+- die/PR boundary: `1110 um x 1110 um`
+- DEF template: `organizer_def/A54/project_defs/A/A54_A.def`
+- final top cell: `A54_A`
+- external pad assignments: 22 entries in `info.yaml`
+- internal pad-cell interface terminals: 125, exactly matching the DEF template
 
-This repository is a **derivation**. The template, Nix flake, and
-LibreLane flow are the work of Leo Moser and the wafer-space
-contributors; the workshop pad layout is a port of Juan Moya's
-`padring_gf180`. Both are Apache-2.0.
+The response pads are configured as outputs (`OE=1`, `IE=0`) with weak pulls
+disabled.  Clock, reset, command-valid, and command-data pads are configured as
+inputs with weak pulls disabled.
 
-- Upstream template — https://github.com/wafer-space/gf180mcu-project-template
-  pinned at commit `8bd0f6ff28947bf222c5288343f8f3ee1fc04632`
-  (`chore: update flake to librelane 3.0`, 2026-03-26).
-- Workshop pad layout — https://github.com/JuanMoya/padring_gf180
-  (`Workshop_CASS/padring/workshop_padring.cfg`).
+The current signoff-complete implementation is in the LibreLane run
+`synthesis/runs/A54_A_wrapper_strong_power3`. Its final DEF contains the same die area,
+pin names, pin uses, pin directions, and absolute pin geometries as the organizer
+template. The submitted GDS also contains one top-level boundary shape on layer
+0/0 from `(0, 0)` to `(1110, 1110) um`.
 
-See `CREDITS.md` for the per-artifact attribution and `NOTICE` for
-the formal Apache-2.0 notice.
+For integration safety, the submitted `gds/A54_A.gds` was re-streamed with
+KLayout PCell and library context information disabled
+(`SaveLayoutOptions.write_context_info = false`). A geometry XOR against the
+signoff source GDS reports 0 differences. Magic DRC and Netgen LVS were then
+rerun directly on this context-free GDS and both passed (DRC count 0; circuits
+match uniquely).
 
-## What this fork changes vs upstream
+The submitted GDS database unit is 0.001 um, as required for reliable KLayout
+DRC. A 0.001 um to 0.005 um integration conversion and back to 0.001 um was
+also tested; the round-trip geometry XOR reports 0 differences and preserves
+the `(0, 0)` to `(1110, 1110) um` physical boundary.
 
-Exactly 6 files (one commit on top of pinned upstream):
+The organizer DEF's VDD and VSS terminals each consist of six separate Metal2
+port shapes. The strengthened implementation connects all six access shapes on
+each net to the core power grid with six independent 2.0 um-wide Metal2 straps.
+Each strap uses four `Via1_2CUT_H` arrays (eight cuts), for 24 via arrays and 48
+cuts per supply net. This replaces the previous single 0.6 um Metal2 branch and
+single-cut via while preserving every organizer pin shape.
 
-| File | Change |
-|------|--------|
-| `src/slot_defines.svh` | add `SLOT_WORKSHOP` block (NUM_INPUT=1, BIDIR=20, ANALOG=60, 4/4 DVDD/DVSS) |
-| `src/chip_core.sv` | replace example counter with a 20-bit counter driving the 20 bidir pads; analog pads float through |
-| `librelane/slots/slot_workshop.yaml` | **new** slot (DIE 2935x2935 um, CORE 2051x2051 um, VERILOG_DEFINES=SLOT_WORKSHOP) |
-| `librelane/config.yaml` | drop SRAM `MACROS` entry and PDN macro connections - not used in this slot |
-| `librelane/pdn_cfg.tcl` | drop SRAM-specific `define_pdn_grid` blocks |
-| `Makefile` | `AVAILABLE_SLOTS += workshop` |
+Run the wrapper RTL test from this directory:
 
-`git log upstream/main..main` shows the single derivation commit;
-`git diff upstream/main..main` shows the delta.
-
-## Workshop slot - pad map at a glance
-
-- Die: **2935 x 2935 um** (same as Juan Moya's reference).
-- **60 x analog** (`gf180mcu_fd_io__asig_5p0`)
-- **20 x bidir** (`gf180mcu_fd_io__bi_24t`)
-- **4 x DVDD** + **4 x DVSS** (`gf180mcu_ws_io__dvdd` / `__dvss`)
-- **clk_pad** (`gf180mcu_fd_io__in_s`), **rst_n_pad** (`gf180mcu_fd_io__in_c`)
-- **1 x input_pad** - Yosys zero-width-vector workaround; chipathon
-  participants can ignore it (documented in `docs/workshop-slot-spec.md`).
-- **4 x corner** (`gf180mcu_fd_io__cor`, inserted by LibreLane).
-
-Pad ordering in `PAD_NORTH` and `PAD_WEST` is **reversed** relative to
-Juan Moya's standalone `workshop_padring.cfg` because LibreLane reads
-pad lists clockwise from the SW corner. Full pad-by-pad mapping in
-`docs/workshop-slot-spec.md`.
-
-## Quickstart
-
-### Build the workshop slot (native, nix-shell)
-
-```bash
-git clone <this-repo-url> chipathon-2026-gf180mcu-padring
-cd chipathon-2026-gf180mcu-padring
-nix-shell               # provides LibreLane 3.0.0
-make clone-pdk          # clones wafer-space/gf180mcu @ 1.8.0
-SLOT=workshop make librelane
+```sh
+iverilog -g2012 -o tb_A54_A.vvp tb/tb_A54_A.sv rtl/A54_A.v rtl/core/*.v
+vvp tb_A54_A.vvp
 ```
 
-Runtime on a modern laptop: **~2h 15m** for the full signoff run
-(Magic DRC + KLayout DRC + LVS + antenna + STA across 3 corners).
+The expected final line is `WRAPPER PASS: signature=a8`.
 
-Final artifacts land in `final/`:
-- `final/gds/chip_top.gds` (~85 MB)
-- `final/metrics.csv` (signoff metrics)
-- `final/*.log` (per-stage logs)
+## Final strong_power3 signoff results
 
-### Inspect a built GDS (Docker, hpretl/iic-osic-tools)
+- detailed-route DRC: 0
+- Magic DRC: 0
+- Netgen LVS: circuits match uniquely; all reported mismatch counts are 0
+- KLayout-versus-Magic stream-out XOR: 0 differences
+- final-route antenna: 0 violating nets and 0 violating pins
+- setup and hold: WNS/TNS and violation counts are 0 in all nine reported corners
+- maximum slew, capacitance, and fanout violations: 0 in all nine corners
+- standard-cell utilization: 66.0073%
+- sequential cells / functional clock sinks: 3042 / 3042
+- VDD worst IR drop: 0.0133624 V (0.267% of 5 V)
+- VSS worst ground rise: 0.0148959 V (0.298% of 5 V)
+- OpenROAD power-grid connectivity: all shapes connected on both VDD and VSS
 
-`scripts/run_docker_iic.sh` spawns the iic-osic-tools container with
-this repo mounted; inside the container run `klayout final/gds/chip_top.gds`
-or `magic -T .../gf180mcuD.magicrc ...`.
-
-See `docs/reproducing-native.md` and `docs/reproducing-docker.md` for
-the detailed walkthroughs.
-
-### Use the workshop slot for your own RTL
-
-Swap `src/chip_core.sv` with your design, keeping the port list
-(NUM_INPUT=1, NUM_BIDIR=20, NUM_ANALOG=60, clk, rst_n), and re-run
-`SLOT=workshop make librelane`. Padring stays fixed.
-
-## Verification
-
-The repository was validated **end-to-end** against a known-good
-reference build. To re-run the pragmatic check (byte-compare the
-six tracked files against the reference tree):
-
-```bash
-scripts/verify_workshop_slot.sh /path/to/reference/template
-```
-
-The reference build (DRC/LVS/antenna/STA signoff on 2026-04-23 with
-LibreLane 3.0 + wafer-space PDK 1.8.0) is the source of truth for
-"clean". As long as the fork's six files byte-match that reference,
-a fresh build on a compatible host will reproduce the same result.
-
-If you do not have the reference tree, the repo itself is the ground
-truth - this fork *is* those six files.
-
-## Repository layout
-
-```
-.
-|-- README.md                       # this file
-|-- NOTICE                          # Apache-2.0 attribution
-|-- CREDITS.md                      # detailed credits
-|-- AUTHORS.md                      # copyright holders (upstream + fork)
-|-- LICENSE                         # Apache-2.0
-|-- docs/
-|   |-- workshop-slot-spec.md       # full pad-by-pad mapping
-|   |-- reproducing-native.md       # nix-shell walkthrough
-|   `-- reproducing-docker.md       # iic-osic-tools walkthrough
-|-- examples/
-|   `-- rtl2gds_chipathon_padring.ipynb   # standalone notebook
-|-- scripts/
-|   |-- run_docker_iic.sh           # iic-osic-tools launcher
-|   `-- verify_workshop_slot.sh     # pragmatic end-to-end check
-|-- librelane/
-|   |-- config.yaml                 # top-level LibreLane config (patched)
-|   |-- pdn_cfg.tcl                 # PDN generator (patched)
-|   |-- chip_top.sdc                # upstream, unchanged
-|   `-- slots/
-|       |-- slot_0p5x0p5.yaml       # upstream, unchanged
-|       |-- slot_0p5x1.yaml         # upstream, unchanged
-|       |-- slot_1x0p5.yaml         # upstream, unchanged
-|       |-- slot_1x1.yaml           # upstream, unchanged
-|       `-- slot_workshop.yaml      # new (this fork)
-|-- src/
-|   |-- chip_top.sv                 # upstream, unchanged
-|   |-- chip_core.sv                # patched (counter->bidir)
-|   `-- slot_defines.svh            # patched (SLOT_WORKSHOP)
-|-- Makefile                        # patched (AVAILABLE_SLOTS += workshop)
-`-- (upstream infra: flake.nix, gf180mcu/, ip/, cocotb/, scripts/, ...)
-```
-
-## License
-
-Apache-2.0, inherited from upstream. See `LICENSE` for the full text,
-`NOTICE` for attribution of third-party material, and `AUTHORS.md`
-for the list of copyright holders.
+Raw reports are included under `verification/` in the submission package. The
+GF180 LibreLane configuration used here does not provide a separate KLayout DRC
+runset; the available signoff physical deck is Magic DRC, while stream-out
+equivalence is independently checked by KLayout-versus-Magic XOR.

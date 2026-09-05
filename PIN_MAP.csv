@@ -1,0 +1,23 @@
+Order,Pad_Slot,External_Pad,IO_Type,Wrapper_Terminals,Design_Use
+1,W12,VSS,ground,VSS,Quiet ground and digital return
+2,W13,VDD,power,VDD,5 V digital supply
+3,W14,rsp_data[0],bidirectional,"rsp_data_CS[0];rsp_data_SL[0];rsp_data_IE[0];rsp_data_OE[0];rsp_data_PU[0];rsp_data_PD[0];rsp_data_OUT[0];rsp_data_PDRV0[0];rsp_data_PDRV1[0];rsp_data_IN[0]",Output bit 0
+4,W15,rsp_data[1],bidirectional,"rsp_data_CS[1];rsp_data_SL[1];rsp_data_IE[1];rsp_data_OE[1];rsp_data_PU[1];rsp_data_PD[1];rsp_data_OUT[1];rsp_data_PDRV0[1];rsp_data_PDRV1[1];rsp_data_IN[1]",Output bit 1
+5,W16,rsp_data[2],bidirectional,"rsp_data_CS[2];rsp_data_SL[2];rsp_data_IE[2];rsp_data_OE[2];rsp_data_PU[2];rsp_data_PD[2];rsp_data_OUT[2];rsp_data_PDRV0[2];rsp_data_PDRV1[2];rsp_data_IN[2]",Output bit 2
+6,W17,rsp_data[3],bidirectional,"rsp_data_CS[3];rsp_data_SL[3];rsp_data_IE[3];rsp_data_OE[3];rsp_data_PU[3];rsp_data_PD[3];rsp_data_OUT[3];rsp_data_PDRV0[3];rsp_data_PDRV1[3];rsp_data_IN[3]",Output bit 3
+7,W18,rsp_data[4],bidirectional,"rsp_data_CS[4];rsp_data_SL[4];rsp_data_IE[4];rsp_data_OE[4];rsp_data_PU[4];rsp_data_PD[4];rsp_data_OUT[4];rsp_data_PDRV0[4];rsp_data_PDRV1[4];rsp_data_IN[4]",Output bit 4
+8,W19,rsp_data[5],bidirectional,"rsp_data_CS[5];rsp_data_SL[5];rsp_data_IE[5];rsp_data_OE[5];rsp_data_PU[5];rsp_data_PD[5];rsp_data_OUT[5];rsp_data_PDRV0[5];rsp_data_PDRV1[5];rsp_data_IN[5]",Output bit 5
+9,W20,rsp_data[6],bidirectional,"rsp_data_CS[6];rsp_data_SL[6];rsp_data_IE[6];rsp_data_OE[6];rsp_data_PU[6];rsp_data_PD[6];rsp_data_OUT[6];rsp_data_PDRV0[6];rsp_data_PDRV1[6];rsp_data_IN[6]",Output bit 6
+10,W21,rsp_data[7],bidirectional,"rsp_data_CS[7];rsp_data_SL[7];rsp_data_IE[7];rsp_data_OE[7];rsp_data_PU[7];rsp_data_PD[7];rsp_data_OUT[7];rsp_data_PDRV0[7];rsp_data_PDRV1[7];rsp_data_IN[7]",Output bit 7
+11,W22,rsp_valid,bidirectional,"rsp_valid_CS;rsp_valid_SL;rsp_valid_IE;rsp_valid_OE;rsp_valid_PU;rsp_valid_PD;rsp_valid_OUT;rsp_valid_PDRV0;rsp_valid_PDRV1;rsp_valid_IN",Output-valid flag
+12,N01,clk,input_schmitt,"clk_PU;clk_PD;clk",System clock input
+13,N02,rst_n,input_schmitt,"rst_n_PU;rst_n_PD;rst_n",Active-low reset input
+14,N03,cmd_valid,input_cmos,"cmd_valid_PU;cmd_valid_PD;cmd_valid",Command-valid input
+15,N04,cmd_data[0],input_cmos,"cmd_data_PU[0];cmd_data_PD[0];cmd_data[0]",Command bit 0
+16,N05,cmd_data[1],input_cmos,"cmd_data_PU[1];cmd_data_PD[1];cmd_data[1]",Command bit 1
+17,N06,cmd_data[2],input_cmos,"cmd_data_PU[2];cmd_data_PD[2];cmd_data[2]",Command bit 2
+18,N07,cmd_data[3],input_cmos,"cmd_data_PU[3];cmd_data_PD[3];cmd_data[3]",Command bit 3
+19,N08,cmd_data[4],input_cmos,"cmd_data_PU[4];cmd_data_PD[4];cmd_data[4]",Command bit 4
+20,N09,cmd_data[5],input_cmos,"cmd_data_PU[5];cmd_data_PD[5];cmd_data[5]",Command bit 5
+21,N10,cmd_data[6],input_cmos,"cmd_data_PU[6];cmd_data_PD[6];cmd_data[6]",Command bit 6
+22,N11,cmd_data[7],input_cmos,"cmd_data_PU[7];cmd_data_PD[7];cmd_data[7]",Command bit 7
