@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <report-database>
- <description>XOR /foss/designs/lstm16x_int8_gf180_1000x1000/A54_A_wrapper/synthesis/runs/A54_A_wrapper_strong_power3/31-magic-streamout/A54_A.magic.gds vs. /foss/designs/lstm16x_int8_gf180_1000x1000/A54_A_wrapper/synthesis/runs/A54_A_wrapper_strong_power3/32-klayout-streamout/A54_A.klayout.gds</description>
+ <description>XOR /foss/designs/lstm16x_int8_gf180_1000x1000/A54_A_wrapper/synthesis/runs/A54_A_wrapper_power_ultra8_signoff/02-magic-streamout/A54_A.magic.gds vs. /foss/designs/lstm16x_int8_gf180_1000x1000/A54_A_wrapper/synthesis/runs/A54_A_wrapper_power_ultra8_signoff/03-klayout-streamout/A54_A.klayout.gds</description>
  <original-file/>
  <generator>drc: script='/usr/local/lib/python3.12/dist-packages/librelane/scripts/klayout/xor.drc'</generator>
  <top-cell>A54_A</top-cell>
@@ -122,6 +122,12 @@
    </categories>
   </category>
   <category>
+   <name>41/0</name>
+   <description>XOR data for layer 41/0</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
    <name>42/0</name>
    <description>XOR data for layer 42/0</description>
    <categories>
@@ -142,6 +148,12 @@
   <category>
    <name>63/63</name>
    <description>XOR data for layer 63/63</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>81/0</name>
+   <description>XOR data for layer 81/0</description>
    <categories>
    </categories>
   </category>

@@ -27,7 +27,9 @@ Reading "VIA_Via1_HV".
 Reading "VIA_via1_2_10000_1200_1_9_1040_1040".
 Reading "VIA_via2_3_10000_1200_1_9_1040_1040".
 Reading "VIA_via3_4_10000_1200_1_9_1040_1040".
-Reading "VIA_Via1_2CUT_H".
+Reading "VIA_Via2_HH".
+Reading "VIA_Via3_HH".
+Reading "VIA_Via4_HH".
 Reading "gf180mcu_fd_sc_mcu7t5v0__clkbuf_4".
 Reading "gf180mcu_fd_sc_mcu7t5v0__buf_8".
 Reading "gf180mcu_fd_sc_mcu7t5v0__buf_3".
@@ -172,6 +174,14 @@ Reading "A54_A".
     245000 uses
     250000 uses
     255000 uses
+    260000 uses
+    265000 uses
+    270000 uses
+    275000 uses
+    280000 uses
+    285000 uses
+    290000 uses
+    295000 uses
 [INFO] Loading A54_A
 
 DRC style is now "drc(full)"
@@ -179,6 +189,6 @@ Loading DRC CIF style.
 No errors found.
 [INFO] COUNT: 0
 [INFO] Should be divided by 3 or 4
-[INFO] DRC Checking DONE (/foss/designs/lstm16x_int8_gf180_1000x1000/A54_A_wrapper/synthesis/runs/A54_A_wrapper_strong_power3/38-magic-drc/reports/drc.magic.rpt)
-[INFO] Saving mag view with DRC errors (/foss/designs/lstm16x_int8_gf180_1000x1000/A54_A_wrapper/synthesis/runs/A54_A_wrapper_strong_power3/38-magic-drc/views/A54_A.drc.mag)
+[INFO] DRC Checking DONE (/foss/designs/lstm16x_int8_gf180_1000x1000/A54_A_wrapper/synthesis/runs/A54_A_wrapper_power_ultra8_signoff/09-magic-drc/reports/drc.magic.rpt)
+[INFO] Saving mag view with DRC errors (/foss/designs/lstm16x_int8_gf180_1000x1000/A54_A_wrapper/synthesis/runs/A54_A_wrapper_power_ultra8_signoff/09-magic-drc/views/A54_A.drc.mag)
 [INFO] Saved

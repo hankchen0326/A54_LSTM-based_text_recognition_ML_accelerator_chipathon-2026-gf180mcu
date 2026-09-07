@@ -17,7 +17,7 @@
       1110.0
     ],
     "parsed_pin_count": 125,
-    "path": "synthesis/runs/A54_A_wrapper_strong_power3/final/def/A54_A.def",
+    "path": "synthesis/power_ring_ultra8/A54_A_power_ultra.def",
     "units": 2000
   },
   "gds": {
@@ -30,7 +30,7 @@
     ],
     "layer_0_0_exact_1110_square": true,
     "layer_0_0_shape_count": 1,
-    "path": "synthesis/runs/A54_A_wrapper_strong_power3/final/gds/A54_A.gds",
+    "path": "synthesis/runs/A54_A_wrapper_power_ultra8_signoff/final/gds/A54_A.gds",
     "top_cell": "A54_A"
   },
   "pass": true,
