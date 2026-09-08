@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <report-database>
- <description>XOR /foss/designs/lstm16x_int8_gf180_1000x1000/A54_A_wrapper/synthesis/runs/A54_A_wrapper_power_ultra8_signoff/02-magic-streamout/A54_A.magic.gds vs. /foss/designs/lstm16x_int8_gf180_1000x1000/A54_A_wrapper/synthesis/runs/A54_A_wrapper_power_ultra8_signoff/03-klayout-streamout/A54_A.klayout.gds</description>
+ <description>XOR /foss/designs/lstm16x_int8_gf180_1000x1000/A54_A_wrapper/synthesis/runs/A54_A_wrapper_power_ultra9_signoff/02-magic-streamout/A54_A.magic.gds vs. /foss/designs/lstm16x_int8_gf180_1000x1000/A54_A_wrapper/synthesis/runs/A54_A_wrapper_power_ultra9_signoff/03-klayout-streamout/A54_A.klayout.gds</description>
  <original-file/>
  <generator>drc: script='/usr/local/lib/python3.12/dist-packages/librelane/scripts/klayout/xor.drc'</generator>
  <top-cell>A54_A</top-cell>

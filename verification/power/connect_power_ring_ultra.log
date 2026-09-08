@@ -3,5 +3,5 @@ Features included (+) or not (-): +GPU +GUI +Python
 This program is licensed under the BSD-3 license. See the LICENSE file for details.
 Components of this program may be licensed under more restrictive licenses which must be honored.
 [WARNING ORD-0039] .openroad ignored with -python
-VDD: removed 31 old entry shapes; Metal5 width=30.0um; ring=(92000,92000)..(2128000,2128000); entry cuts Via2/Via3/Via4=1908/1908/954; ring Via4 cuts=13356; skipped non-overlapping crossings=2
-VSS: removed 31 old entry shapes; Metal5 width=30.0um; ring=(30000,30000)..(2190000,2190000); entry cuts Via2/Via3/Via4=1908/1908/1908; ring Via4 cuts=13356; skipped non-overlapping crossings=0
+VDD: removed 31 old entry shapes; Metal5 width=30.0um; ring=(92000,92000)..(2128000,2128000); entry cuts Via2/Via3/Via4=1320/1320/704; ring Via4 cuts=10080; skipped non-overlapping crossings=2
+VSS: removed 31 old entry shapes; Metal5 width=30.0um; ring=(30000,30000)..(2190000,2190000); entry cuts Via2/Via3/Via4=1320/1320/1320; ring Via4 cuts=10080; skipped non-overlapping crossings=0

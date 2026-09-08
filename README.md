@@ -18,30 +18,16 @@ The response pads are configured as outputs (`OE=1`, `IE=0`) with weak pulls
 disabled.  Clock, reset, command-valid, and command-data pads are configured as
 inputs with weak pulls disabled.
 
-The current signoff-complete implementation is in the LibreLane run
-`synthesis/runs/A54_A_wrapper_strong_power3`. Its final DEF contains the same die area,
-pin names, pin uses, pin directions, and absolute pin geometries as the organizer
-template. The submitted GDS also contains one top-level boundary shape on layer
-0/0 from `(0, 0)` to `(1110, 1110) um`.
+This package contains the final closed-ring implementation. It uses separate
+30 um Metal5 rings for VDD and VSS. All six VDD and six VSS access shapes have
+independent stacked-via entry paths. The generated Via2, Via3, and Via4 arrays
+use a 0.66 um center pitch. With 0.26 um cuts, this gives 0.40 um cut-to-cut
+spacing, above the 0.36 um requirement for arrays of 4x4 or larger. Each supply
+ring is connected to the vertical Metal4 PDN through 10,080 Via4 cuts.
 
-For integration safety, the submitted `gds/A54_A.gds` was re-streamed with
-KLayout PCell and library context information disabled
-(`SaveLayoutOptions.write_context_info = false`). A geometry XOR against the
-signoff source GDS reports 0 differences. Magic DRC and Netgen LVS were then
-rerun directly on this context-free GDS and both passed (DRC count 0; circuits
-match uniquely).
-
-The submitted GDS database unit is 0.001 um, as required for reliable KLayout
-DRC. A 0.001 um to 0.005 um integration conversion and back to 0.001 um was
-also tested; the round-trip geometry XOR reports 0 differences and preserves
-the `(0, 0)` to `(1110, 1110) um` physical boundary.
-
-The organizer DEF's VDD and VSS terminals each consist of six separate Metal2
-port shapes. The strengthened implementation connects all six access shapes on
-each net to the core power grid with six independent 2.0 um-wide Metal2 straps.
-Each strap uses four `Via1_2CUT_H` arrays (eight cuts), for 24 via arrays and 48
-cuts per supply net. This replaces the previous single 0.6 um Metal2 branch and
-single-cut via while preserving every organizer pin shape.
+The final GDS has 0.001 um DBU and one exact 1110 um x 1110 um boundary on
+layer 0/0. The organizer DEF comparison reports no changed, missing, or extra
+terminals.
 
 Run the wrapper RTL test from this directory:
 
@@ -52,22 +38,25 @@ vvp tb_A54_A.vvp
 
 The expected final line is `WRAPPER PASS: signature=a8`.
 
-## Final strong_power3 signoff results
+## Final signoff results
 
-- detailed-route DRC: 0
 - Magic DRC: 0
+- GF180 KLayout Via2 rules: 0 markers, including V2.2b
+- GF180 KLayout Via3 rules: 0 markers, including V3.2b
+- GF180 KLayout Via4 rules: 0 markers, including V4.2b
 - Netgen LVS: circuits match uniquely; all reported mismatch counts are 0
 - KLayout-versus-Magic stream-out XOR: 0 differences
-- final-route antenna: 0 violating nets and 0 violating pins
-- setup and hold: WNS/TNS and violation counts are 0 in all nine reported corners
-- maximum slew, capacitance, and fanout violations: 0 in all nine corners
-- standard-cell utilization: 66.0073%
-- sequential cells / functional clock sinks: 3042 / 3042
-- VDD worst IR drop: 0.0133624 V (0.267% of 5 V)
-- VSS worst ground rise: 0.0148959 V (0.298% of 5 V)
+- illegal overlap: 0
+- VDD/VSS same-layer contacts: 0 on Metal1 through Metal5
+- VDD worst IR drop: 0.00598 V (0.12% of 5 V)
+- VSS worst ground rise: 0.0192 V (0.38% of 5 V)
+- OpenROAD EM maximum reported current: 0.00373 A on VDD and 0.0106 A on VSS
 - OpenROAD power-grid connectivity: all shapes connected on both VDD and VSS
+- GDS DBU: 0.001 um
+- boundary on layer 0/0: exactly 1110 um x 1110 um
 
-Raw reports are included under `verification/` in the submission package. The
-GF180 LibreLane configuration used here does not provide a separate KLayout DRC
-runset; the available signoff physical deck is Magic DRC, while stream-out
-equivalence is independently checked by KLayout-versus-Magic XOR.
+Raw reports are included under `verification/`. The standard LibreLane GF180
+configuration does not automatically run a KLayout deck, so the GF180 Via2,
+Via3, and Via4 rule tables were also run directly against the final GDS. Their
+original `.lyrdb` databases and logs are under
+`verification/drc/klayout_via_rules/`.

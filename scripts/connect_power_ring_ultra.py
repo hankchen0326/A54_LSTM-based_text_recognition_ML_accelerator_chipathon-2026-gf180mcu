@@ -65,9 +65,10 @@ ring_specs = {
 }
 
 # A single-cut via has a 0.26 um cut and a maximum 0.19 um metal enclosure.
-# A 0.56 um center pitch therefore leaves 0.30 um cut-to-cut spacing.  Via
-# centers are filled only where the complete via metal enclosure fits.
-via_pitch = 1120
+# Large Via2/Via3/Via4 arrays require at least 0.36 um cut-to-cut spacing.
+# A 0.66 um center pitch leaves 0.40 um spacing, including 0.04 um margin.
+# Via centers are filled only where the complete via metal enclosure fits.
+via_pitch = 1320
 via_enclosure = 380
 
 # Entry stacks fit completely in the organizer's 20 um left boundary channel.

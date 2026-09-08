@@ -4,7 +4,7 @@ This program is licensed under the BSD-3 license. See the LICENSE file for detai
 Components of this program may be licensed under more restrictive licenses which must be honored.
 [WARNING ORD-0039] .openroad ignored with -python
 Metal1 VDD 2176 VSS 2055 contacts 0
-Metal2 VDD 5994 VSS 5750 contacts 0
-Metal3 VDD 7902 VSS 7658 contacts 0
-Metal4 VDD 18279 VSS 19110 contacts 0
-Metal5 VDD 14320 VSS 15274 contacts 0
+Metal2 VDD 5406 VSS 5162 contacts 0
+Metal3 VDD 6726 VSS 6482 contacts 0
+Metal4 VDD 14165 VSS 14658 contacts 0
+Metal5 VDD 10794 VSS 11410 contacts 0

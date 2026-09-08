@@ -1616,8 +1616,8 @@ No property $X found for device pfet_05v0
 No property $Y found for device pfet_05v0
 No property par1 found for device diode_nd2ps_06v0
 No property par1 found for device diode_pd2nw_06v0
-Comparison output logged to file /foss/designs/lstm16x_int8_gf180_1000x1000/A54_A_wrapper/synthesis/runs/A54_A_wrapper_power_ultra8_signoff/15-netgen-lvs/reports/lvs.netgen.rpt
-Logging to file "/foss/designs/lstm16x_int8_gf180_1000x1000/A54_A_wrapper/synthesis/runs/A54_A_wrapper_power_ultra8_signoff/15-netgen-lvs/reports/lvs.netgen.rpt" enabled
+Comparison output logged to file /foss/designs/lstm16x_int8_gf180_1000x1000/A54_A_wrapper/synthesis/runs/A54_A_wrapper_power_ultra9_signoff/15-netgen-lvs/reports/lvs.netgen.rpt
+Logging to file "/foss/designs/lstm16x_int8_gf180_1000x1000/A54_A_wrapper/synthesis/runs/A54_A_wrapper_power_ultra9_signoff/15-netgen-lvs/reports/lvs.netgen.rpt" enabled
 
 Contents of circuit 1:  Circuit: 'gf180mcu_fd_sc_mcu7t5v0__fillcap_4'
 Circuit gf180mcu_fd_sc_mcu7t5v0__fillcap_4 contains 0 device instances.
@@ -2963,5 +2963,5 @@ Circuit 1 contains 26607 nets,    Circuit 2 contains 26607 nets.
 Final result: 
 Circuits match uniquely.
 .
-Logging to file "/foss/designs/lstm16x_int8_gf180_1000x1000/A54_A_wrapper/synthesis/runs/A54_A_wrapper_power_ultra8_signoff/15-netgen-lvs/reports/lvs.netgen.rpt" disabled
+Logging to file "/foss/designs/lstm16x_int8_gf180_1000x1000/A54_A_wrapper/synthesis/runs/A54_A_wrapper_power_ultra9_signoff/15-netgen-lvs/reports/lvs.netgen.rpt" disabled
 LVS Done.
