@@ -12,6 +12,10 @@ project:
   discord: "cissy07838"
   description: "A GF180MCU 16-lane INT8 LSTM accelerator in the organizer-supplied 1110 um x 1110 um A54 A-block wrapper."
   lvs_config: "lvs_config.json"
+  gf_def_ready: true  # Ready for DEF generation with the GlobalFoundries pad frame.
+  ws_def_ready: true  # Ready for DEF generation with the Wafer.Space pad frame.
+  drc_ready: true     # Final GDS is ready for integration and DRC.
+  lvs_ready: true     # Final GDS and reference netlist are ready for integrated LVS.
 
 pins:
   - name: VSS
